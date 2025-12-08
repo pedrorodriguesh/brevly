@@ -1,0 +1,16 @@
+services:
+  brevly-pg:
+    image: bitnami/postgresql:latest
+    container_name: brevly-pg
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=brevly
+    volumes:
+      - brevly-pg:/bitnami/postgresql
+      - "./docker:/docker-entrypoint-initdb.d"
+
+volumes:
+  brevly-pg:

@@ -1,0 +1,11 @@
+{
+  "name": "brevly",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "packageManager": "pnpm@10.25.0"
+}

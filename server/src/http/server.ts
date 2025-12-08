@@ -7,6 +7,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { createLinkRoute } from './routes/create-link'
 
 const server = fastify()
 
@@ -31,6 +32,9 @@ server.register(fastifySwagger, {
 server.register(scalarUI, {
   routePrefix: '/docs',
 })
+
+// ## Routes ##
+server.register(createLinkRoute)
 
 server.listen({ port: 3333 }).then(() => {
   console.log('✅ | HTTP Server running! | Docs on: http://localhost:3333/docs')

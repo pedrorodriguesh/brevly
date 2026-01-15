@@ -7,7 +7,12 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { env } from '../env'
 import { createLinkRoute } from './routes/create-link'
+import { deleteLinkRoute } from './routes/delete-link'
+import { exportCsv } from './routes/export-csv'
+import { getLinksRoute } from './routes/get-links'
+import { redirectRoute } from './routes/redirect'
 
 const server = fastify()
 
@@ -15,7 +20,9 @@ server.setValidatorCompiler(validatorCompiler)
 server.setSerializerCompiler(serializerCompiler)
 
 server.register(fastifyCors, {
-  origin: '*',
+  origin: 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
 })
 
 server.register(fastifySwagger, {
@@ -35,7 +42,11 @@ server.register(scalarUI, {
 
 // ## Routes ##
 server.register(createLinkRoute)
+server.register(redirectRoute)
+server.register(getLinksRoute)
+server.register(deleteLinkRoute)
+server.register(exportCsv)
 
-server.listen({ port: 3333 }).then(() => {
+server.listen({ port: env.PORT }).then(() => {
   console.log('✅ | HTTP Server running! | Docs on: http://localhost:3333/docs')
 })

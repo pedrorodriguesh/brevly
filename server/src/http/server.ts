@@ -47,6 +47,6 @@ server.register(getLinksRoute)
 server.register(deleteLinkRoute)
 server.register(exportCsv)
 
-server.listen({ port: env.PORT }).then(() => {
-  console.log('✅ | HTTP Server running! | Docs on: http://localhost:3333/docs')
+server.listen({ port: env.PORT, host: '0.0.0.0' }).then(() => {
+  console.log(`✅ | HTTP Server running on port ${env.PORT}! | Docs on: http://localhost:${env.PORT}/docs`)
 })
